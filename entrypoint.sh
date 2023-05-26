@@ -1,19 +1,19 @@
 #!/bin/sh
 
 if [[ "$DISABLE_SHARE" != "true" ]]; then
-  sed -i s%\#SHARE_LOCATION%"location /share/ {\n            proxy_pass http://share:8080;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
+  sed -i s%\#SHARE_LOCATION%"location /share/ {\n            proxy_pass http://share;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
 fi
 
 if [[ "$DISABLE_ADW" != "true" ]]; then
-  sed -i s%\#ADW_LOCATION%"location /workspace/ {\n            proxy_pass http://digital-workspace:8080/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
+  sed -i s%\#ADW_LOCATION%"location /workspace/ {\n            proxy_pass http://digital-workspace/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
 fi
 
 if [[ "$DISABLE_CONTROL_CENTER" != "true" ]]; then
-  sed -i s%\#CONTROL_CENTER_LOCATION%"location /admin/ {\n            proxy_pass http://control-center:8080/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
+  sed -i s%\#CONTROL_CENTER_LOCATION%"location /admin/ {\n            proxy_pass http://control-center/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
 fi
 
 if [[ "$DISABLE_SYNCSERVICE" != "true" ]]; then
-  sed -i s%\#SYNCSERVICE_LOCATION%"location /syncservice/ {\n            proxy_pass http://sync-service:9090/alfresco/;\n        }"%g /etc/nginx/nginx.conf
+  sed -i s%\#SYNCSERVICE_LOCATION%"location /syncservice/ {\n            proxy_pass http://sync-service/alfresco/;\n        }"%g /etc/nginx/nginx.conf
 fi
 
 if [[ "$DISABLE_PROMETHEUS" != "true" ]]; then
@@ -21,7 +21,7 @@ if [[ "$DISABLE_PROMETHEUS" != "true" ]]; then
 fi
 
 if [[ "$ENABLE_CONTENT_APP" == "true" ]]; then
-  sed -i s%\#ACA_LOCATION%"location /content-app/ {\n            proxy_pass http://content-app:8080/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
+  sed -i s%\#ACA_LOCATION%"location /content-app/ {\n            proxy_pass http://content-app/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
 fi
 
 if [[ $ADW_URL ]]; then
